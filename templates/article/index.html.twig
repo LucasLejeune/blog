@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}article{% endblock %}
+
+{% block body %}
+<div style="text-align:center">
+    <h1> {{article.titre}} </h1>
+    <p> Catégorie: {{article.categorie.libelle}}</p>
+    <p> {{article.contenu|raw}} </p>
+</div>
+    <p style="text-align:right; padding-right:60px">Article crée le: {{article.dateCreation|date("d/m/Y \\à H:i:s")}}</p>
+
+{% endblock %}
