@@ -43,14 +43,12 @@ class CategorieController extends AbstractController
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
         $manager = $doctrine->getManager();
-
         $form->handleRequest($request);
+        
         if ($form->isSubmitted() && $form->isValid()){
             $categorie = $form->getData();
-
             $manager->persist($categorie);
             $manager->flush(); //execute les requetes de base
-
         }
 
         return $this->renderForm('categorie/categorieAdd.html.twig', [
