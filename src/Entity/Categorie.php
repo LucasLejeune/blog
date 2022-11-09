@@ -29,9 +29,18 @@ class Categorie
      */
     private $articles;
 
+    /**
+     * @ORM\Column(type="string", length=45, nullable=true)
+     */
+    private $fond;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+    }
+
+    public function __toString(){
+        return $this->libelle;
     }
 
     public function getId(): ?int
@@ -77,6 +86,18 @@ class Categorie
                 $article->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFond(): ?string
+    {
+        return $this->fond;
+    }
+
+    public function setFond(?string $fond): self
+    {
+        $this->fond = $fond;
 
         return $this;
     }
