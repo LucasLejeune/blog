@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer une catégorie{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    a { color: red; }
+    table,tr,td,th { border: 1px solid black; border-collapse: collapse }
+</style>
+    <div class="main">
+        <h1>Supprimer une catégorie</h1>
+        <table>
+            <thead>
+                <th>Identifiant </th>
+                <th>Libelle</th>
+            </thead>
+            <tbody>
+        {% for categorie in categories %}   
+            <td> {{categorie.getId}} </td>
+            <td> {{categorie.getLibelle}} </td>
+            <td> <a href="{{ path('suppr_categorie',{'id': categorie.getId}) }}">Supprimer la catégorie</a> </td>
+            <tr></tr>
+            
+        {% endfor %}
+    </div>  
+{% endblock %}

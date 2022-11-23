@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer un article{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+    <div class="main">
+        <h1>Supprimer un article</h1>
+        <table>
+            <thead>
+                <th>Identifiant </th>
+                <th>Titre</th>
+                <th>Date de création</th>
+                <th>catégorie</th>
+            </thead>
+            <tbody>
+        {% for article in articles %}
+            <td>{{article.getId}}</td>
+            <td> {{article.getTitre}} </td>            
+            <td> {{article.getDateCreation|date("d/m/Y \\à H:i:s")}} </td>
+            <td> {{article.getCategorie}} </td>
+            <td> <a href="{{ path('suppr_article',{'id': article.getId}) }}">Supprimer l'article</a> </td>
+            <tr></tr>
+            
+        {% endfor %}
+    </div>  
+{% endblock %}

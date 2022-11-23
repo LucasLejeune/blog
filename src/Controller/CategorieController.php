@@ -55,5 +55,33 @@ class CategorieController extends AbstractController
             'form' => $form
         ]);
     }
+
+    /**
+     * @Route("/categorieDel", name="del_categorie")
+     */
+    public function categorieDel(CategorieRepository $categorieRepo): Response
+    {
+        $categories = $categorieRepo->findAll();
+        return $this->render('categorie/categoriesDel.html.twig', [
+            'categories' => $categories,
+            
+        ]);
+    }
+
+    /**
+     * @Route("/categorieDel/{id}", name="suppr_categorie")
+     */
+    public function supprCategorie(CategorieRepository $categorieRepo, ArticleRepository $articleRepo, $id): Response
+    {
+        $categorie = $categorieRepo->find($id);
+        
+        if ($categorie->getArticles()->count() == 0){
+            $delCategorie = $categorieRepo->remove($categorie, true);
+        }
+        else {
+            return $this->redirectToRoute('del_categorie');
+        }
+        
+    }
     
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Form\ArticleType;
@@ -51,6 +52,7 @@ class ArticleController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()){
             $article = $form->getData();
+            $article->setDateCreation(new DateTime());
             $manager->persist($article);
             $manager->flush(); //execute les requetes de base
         }
@@ -58,5 +60,26 @@ class ArticleController extends AbstractController
         return $this->renderForm('categorie/categorieAdd.html.twig', [
             'form' => $form
         ]);
+    }
+    /**
+     * @Route("/articleDel", name="del_article")
+     */
+    public function articleDel(ArticleRepository $articleRepo): Response
+    {
+        $articles = $articleRepo->findAll();
+        return $this->render('article/articlesDel.html.twig', [
+            'articles' => $articles,
+            
+        ]);
+    }
+
+    /**
+     * @Route("/articleDel/{id}", name="suppr_article")
+     */
+    public function supprArticle(ArticleRepository $articleRepo, $id): Response
+    {
+        $article = $articleRepo->find($id);
+        $delArticle = $articleRepo->remove($article, true);
+        return $this->redirectToRoute('del_article');
     }
 }

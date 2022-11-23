@@ -3,6 +3,13 @@
 {% block title %}article{% endblock %}
 
 {% block body %}
+<style>
+    body{ 
+        background-image: url({{ article.categorie.fond }});
+        background-size: cover;
+        text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em white;
+    }
+</style>
 <div style="text-align:center">
     <h1> {{article.titre}} </h1>
     <p> Catégorie: <a href="{{ path('app_categorie',{'id': article.categorie.id}) }}">{{article.categorie.libelle}}</a></p>
