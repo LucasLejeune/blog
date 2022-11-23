@@ -47,7 +47,7 @@ class CategorieController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()){
             $categorie = $form->getData();
-            $manager->persist($categorie);
+            $manager->persist($categorie); 
             $manager->flush(); //execute les requetes de base
         }
 
