@@ -55,9 +55,10 @@ class ArticleController extends AbstractController
             $article->setDateCreation(new DateTime());
             $manager->persist($article);
             $manager->flush(); //execute les requetes de base
+            return $this->redirect('article/'.$article->getId());
         }
 
-        return $this->renderForm('categorie/categorieAdd.html.twig', [
+        return $this->renderForm('article/articleAdd.html.twig', [
             'form' => $form
         ]);
     }
